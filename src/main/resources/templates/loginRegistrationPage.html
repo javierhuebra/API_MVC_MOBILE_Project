@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/loginRegisterStyles.css">
+    <title>Página de Registro</title>
+</head>
+<body class="root">
+<div class="seccion">
+    <h1>Registro</h1>
+
+
+    <form th:action="@{/registration}" method="POST" th:object="${user}">
+        <div th:if="${#fields.hasErrors()}">
+            <ul>
+                <li style="color: red" th:each="error : ${#fields.errors()}">
+                    <span th:text="${error}"></span>
+                </li>
+            </ul>
+        </div>
+        <label>
+            Email:
+            <input type="text" th:field="*{email}">
+        </label>
+        <label>
+            Password:
+            <input type="password" th:field="*{password}">
+
+        </label>
+        <label>
+            Confirmar Password:
+            <input type="password" th:field="*{passwordConfirmation}">
+        </label>
+        <input type="submit" value="Crear Cuenta">
+    </form>
+</div>
+<div class="seccion">
+    <h1>Login</h1>
+
+    <form th:action="@{/login}" method="POST" th:object="${user}">
+        <ul>
+            <li style="color: red" th:if="${errorLogin}" th:text="${errorLogin}"></li>
+        </ul>
+        <label>
+            Email:
+            <input type="text" th:field="*{email}">
+        </label>
+        <label>
+            Password:
+            <input type="text" th:field="*{password}">
+        </label>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+</body>
+</html>

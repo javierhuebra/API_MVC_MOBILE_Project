@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.root{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.seccion{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 400px;
+    background-color: #f6ead5;
+    align-items: flex-end;
+    justify-content: center;
+}
