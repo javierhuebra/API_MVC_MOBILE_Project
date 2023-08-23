@@ -14,10 +14,12 @@ public class Evento {
     private Long id;
 
     private String nombre;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
     private String ubicacion;
+
+    private String provincia;
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -45,6 +47,14 @@ public class Evento {
     private List<Mensaje> mensajes;
 
     public Evento() {
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
     public Long getId() {

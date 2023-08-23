@@ -26,6 +26,16 @@
             <input type="text" th:field="*{email}">
         </label>
         <label>
+            Provincia donde se realiza:
+            <select id="provincia" name="provincia" th:field="*{provincia}">
+                <option value="">Seleccione una provincia</option>
+                <option th:each="provincia : ${provincias}"
+                        th:value="${provincia}"
+                        th:text="${provincia}">
+                </option>
+            </select>
+        </label>
+        <label>
             Password:
             <input type="password" th:field="*{password}">
 

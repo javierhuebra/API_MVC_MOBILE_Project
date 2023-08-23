@@ -10,6 +10,80 @@
 <body>
     <h1>Bienvenido! Inició sesión :)</h1>
     <h2>Hola <span th:text="${usuario.email}"></span></h2>
+
+    <h3>Estos son los eventos en tu provincia:</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Provincia</th>
+            <th>Organizador</th>
+            <th>Action/Status</th>
+        </tr>
+        </thead>
+        <tbody >
+            <tr th:each="eventoDeProvincia : ${eventosPorProvinciaUser}">
+                <td th:text="${eventoDeProvincia.nombre}"></td>
+                <td th:text="${#dates.format(eventoDeProvincia.fecha, 'dd-MM-yyyy')}"></td>
+                <td th:text="${eventoDeProvincia.ubicacion}"></td>
+                <td th:text="${eventoDeProvincia.organizador.email}"></td>
+                <td> ACCIONES </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Estos eventos no estan en tu provincia:</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Provincia</th>
+            <th>Organizador</th>
+            <th>Action/Status</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr th:each="eventoDeProvincia : ${eventosPorProvinciaNot}">
+            <td th:text="${eventoDeProvincia.nombre}"></td>
+            <td th:text="${#dates.format(eventoDeProvincia.fecha, 'dd-MM-yyyy')}"></td>
+            <td th:text="${eventoDeProvincia.ubicacion}"></td>
+            <td th:text="${eventoDeProvincia.organizador.email}"></td>
+            <td> ACCIONES </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <form th:action="@{/nuevo/evento}" method="POST" th:object="${evento}">
+
+        <label>
+            Nombre del evento:
+            <input type="text" th:field="*{nombre}">
+        </label>
+        <label>
+            Fecha del evento:
+            <input type="date" th:field="*{fecha}">
+        </label>
+        <label>
+            Ubicación del evento:
+            <input type="text" th:field="*{ubicacion}">
+        </label>
+        <label>
+            Provincia donde se realiza:
+            <select id="provincia" name="provincia" th:field="*{provincia}">
+                <option value="">Seleccione una provincia</option>
+                <option th:each="provincia : ${provincias}"
+                        th:value="${provincia}"
+                        th:text="${provincia}">
+                </option>
+            </select>
+        </label>
+        <input type="submit" value="Crear Evento">
+    </form>
     <a href="/logout">Cerrar sesión</a>
 </body>
 </html>

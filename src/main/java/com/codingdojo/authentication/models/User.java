@@ -18,6 +18,8 @@ public class User {
     @Email(message = "Email no es válido.")
     @NotBlank(message = "El mail no debe ser nulo")
     private String email;
+    @NotBlank(message = "Debe seleccionar una provincia")
+    private String provincia;
     @Size(min=5, message="El password debe ser de 6 caracteres como mínimo.")
     private String password;
     @Transient // Esto para no guardar en la base de datos la pass dos veces
@@ -48,6 +50,14 @@ public class User {
     @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Mensaje> mensajes;
     public User() {
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
     public List<Mensaje> getMensajes() {
