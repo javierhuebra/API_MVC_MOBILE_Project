@@ -11,4 +11,5 @@ public interface EventoRepository extends CrudRepository<Evento,Long> {
 
     List<Evento> findByProvinciaIsNot(String provincia); //Buscar eventos que no se hagan en la provincia dada
 
+
 }
