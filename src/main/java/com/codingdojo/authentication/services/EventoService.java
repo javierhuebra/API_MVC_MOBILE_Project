@@ -1,6 +1,7 @@
 package com.codingdojo.authentication.services;
 
 import com.codingdojo.authentication.models.Evento;
+import com.codingdojo.authentication.models.User;
 import com.codingdojo.authentication.repositories.EventoRepository;
 import jdk.jfr.Event;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,18 @@ public class EventoService {
     public List<Evento> buscarEventosNotProvincia(String provincia){
         return eventoRepository.findByProvinciaIsNot(provincia);
     }
+
+    //CONFIRMAR O CANCELAR ASISTENCIA A EVENTO
+    public void unirseCancelarEvento(Evento evento, User usuario, boolean confirmacion){
+        if(confirmacion){
+            evento.getAsistentes().add(usuario);
+        }else{
+            evento.getAsistentes().remove(usuario);
+        }
+        eventoRepository.save(evento);//Una vez modificada la lista de asistentes guardo el mismo evento nuevamente.
+    }
+
+
 
 
 }

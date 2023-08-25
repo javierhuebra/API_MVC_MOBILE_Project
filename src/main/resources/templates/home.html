@@ -25,7 +25,9 @@
     </thead>
     <tbody>
     <tr th:each="eventoDeProvinciaUno : ${eventosPorProvinciaUser}">
-        <td th:text="${eventoDeProvinciaUno.nombre}"></td>
+        <td>
+            <a th:href="@{/events/{idEvento}(idEvento = ${eventoDeProvinciaUno.id})}" th:text="${eventoDeProvinciaUno.nombre}"></a>
+        </td>
         <td th:text="${#dates.format(eventoDeProvinciaUno.fecha, 'dd-MM-yyyy')}"></td>
         <td th:text="${eventoDeProvinciaUno.ubicacion}"></td>
         <td th:text="${eventoDeProvinciaUno.provincia}"></td>
@@ -36,6 +38,10 @@
                 <form th:action="@{/events/{id}/delete(id = ${eventoDeProvinciaUno.id})}" th:method="DELETE">
                     <input type="submit" value="Eliminar">
                 </form>
+            </div>
+            <div th:if="${eventoDeProvinciaUno.organizador.id != usuario.id}">
+                <a th:if="${!(eventoDeProvinciaUno.getAsistentes().contains(usuario))}" th:href="@{/event/{idEvento}/{idUsuario}/unirse(idEvento =${eventoDeProvinciaUno.id}, idUsuario=${usuario.id})}">Asistir</a>
+                <a th:if="${(eventoDeProvinciaUno.getAsistentes().contains(usuario))}" th:href="@{/event/{idEvento}/{idUsuario}/cancelar(idEvento =${eventoDeProvinciaUno.id}, idUsuario=${usuario.id})}">Cancelar Asistencia</a>
             </div>
         </td>
 
@@ -57,7 +63,9 @@
     </thead>
     <tbody>
     <tr th:each="eventoDeProvincia : ${eventosPorProvinciaNot}">
-        <td th:text="${eventoDeProvincia.nombre}"></td>
+        <td>
+            <a th:href="@{/events/{idEvento}(idEvento = ${eventoDeProvincia.id})}" th:text="${eventoDeProvincia.nombre}"></a>
+        </td>
         <td th:text="${#dates.format(eventoDeProvincia.fecha, 'dd-MM-yyyy')}"></td>
         <td th:text="${eventoDeProvincia.ubicacion}"></td>
         <td th:text="${eventoDeProvincia.provincia}"></td>
@@ -68,6 +76,10 @@
                 <form th:action="@{/events/{id}/delete(id = ${eventoDeProvincia.id})}" th:method="DELETE">
                     <input type="submit" value="Eliminar">
                 </form>
+            </div>
+            <div th:if="${eventoDeProvincia.organizador.id != usuario.id}">
+                <a th:if="${!(eventoDeProvincia.getAsistentes().contains(usuario))}" th:href="@{/event/{idEvento}/{idUsuario}/unirse(idEvento =${eventoDeProvincia.id}, idUsuario=${usuario.id})}">Asistir</a>
+                <a th:if="${(eventoDeProvincia.getAsistentes().contains(usuario))}" th:href="@{/event/{idEvento}/{idUsuario}/cancelar(idEvento =${eventoDeProvincia.id}, idUsuario=${usuario.id})}">Cancelar Asistencia</a>
             </div>
         </td>
     </tr>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${evento.nombre}">Detalle del evento</title>
+</head>
+<body>
+    <h1>
+        Evento: <span th:text="${evento.nombre}"></span>
+    </h1>
+    <h2>
+        Organizador: <span th:text="${evento.organizador.email}"></span>
+    </h2>
+    <h2>
+        Fecha: <span th:text="${evento.fecha}"></span>
+    </h2>
+    <h2>
+        Ubicación: <span th:text="${evento.ubicacion}"></span>
+    </h2>
+    <h2>Asistentes: </h2>
+    <ul>
+        <li th:each="usuario : ${evento.asistentes}" th:text="${usuario.email}"></li>
+    </ul>
+
+    <h2>Mensajes: </h2>
+    <ul>
+        <li th:each="mensaje : ${evento.mensajes}" th:text="${mensaje.comentario}+' ('+${mensaje.autor.email}+')'"></li>
+    </ul>
+
+    <h3>Escriba un mensaje</h3>
+    <form
+            th:action="@{/events/{idEvento}/comentario(idEvento = ${evento.id})}"
+            method="POST"
+    >
+        <label>
+            Complete el campo:
+            <br>
+            <textarea name="comentario"></textarea>
+        </label>
+        <br>
+        <input type="submit" value="Enviar Comentario">
+    </form>
+
+</body>
+</html>
